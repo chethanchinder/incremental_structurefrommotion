@@ -17,7 +17,7 @@ class FeatureMatch:
 		self.descriptors2 = feature2.descriptors
 		self.keypoints1 = feature1.keypoints
 		self.keypoints2 = feature2.keypoints
-
+		self.matcher = cv2.BFMatcher_create(cv2.NORM_L2, crossCheck=True)
 		self.mathes_path = match_path
 		if(os.path.exists(self.mathes_path)):
 			self.load_matches()
@@ -25,16 +25,7 @@ class FeatureMatch:
 			self.match_features()
 
 	def match_features(self):
-		brute_force_matcher  = cv2.BFMatcher_create(cv2.NORM_L2, True)
-		# index parameters
-		FLANN_INDEX = 0
-		index_params = dict(algorithm = FLANN_INDEX, trees = 5)
-		# search parameters
-		search_params = dict(checks = 100)
-		flann_matcher = cv2.FlannBasedMatcher(index_params,search_params)
-		potential_matches = flann_matcher.knnMatch(np.array(self.descriptors1),np.array(self.descriptors2), k=2)
-		## lowes ratio test
-		matches = [match1 for match1, match2 in potential_matches if match1.distance > 0.75*match2.distance ]
+		matches = self.matcher.match(np.array(self.descriptors1),np.array(self.descriptors2))
 		## sort matches
 		matches = sorted(matches, key= lambda x: x.distance)
 		for match in matches:

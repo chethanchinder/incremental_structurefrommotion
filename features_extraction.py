@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import os
 import pickle
+import numpy as np
 
 class FeatureExtractor:
 	def __init__(self, file_path, featurePath, root_dir):
@@ -11,8 +12,10 @@ class FeatureExtractor:
 		self.keypoints = []
 		self.descriptors = []
 		self.feature_path = os.path.join(featurePath, self.image_name+".pkl")
-		self.extractKpAndDescriptors()
 		self.root_dir =root_dir
+		self.rotation = np.zeros((3,3))
+		self.translation = np.zeros((3,1))
+		self.extractKpAndDescriptors()
 
 	def extractKpAndDescriptors(self):
 		if(os.path.exists(self.feature_path)):
@@ -44,7 +47,7 @@ class FeatureExtractor:
 			keypoints.append(cv2.KeyPoint(x= feature[0][0],y= feature[0][1],size = feature[1], angle = feature[2],
 										  response = feature[3], octave = feature[4], class_id = feature[5]))
 			descriptors.append(feature[6])
-		return keypoints, descriptors
+		return keypoints, np.array(descriptors)
 
 def extractViewFeatures(root_dir):
 	file_paths = sorted(glob.glob(os.path.join(root_dir,"images", "*.jpg")))

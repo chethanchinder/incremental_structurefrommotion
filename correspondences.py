@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import motion
+import motion_utils
 import os
 
 def getKpOpticalFLow(im1, im2):
