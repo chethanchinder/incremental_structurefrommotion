@@ -8,10 +8,10 @@ import argparse
 
 if __name__ == '__main__':
     print("Welocome to c-SFM v.01")
-    #root_dir = "./../Benchmarking_Camera_Calibration_2008/entry-P10"
-    parser = argparse.ArgumentParser()
-    parser.add_argument("root_dir", help="specify the path of root dir of images")
-    root_dir = parser.parse_args().root_dir
+    root_dir = "./../Benchmarking_Camera_Calibration_2008/Herz-Jesus-P25"
+    #parser = argparse.ArgumentParser()
+    #parser.add_argument("root_dir", help="specify the path of root dir of images")
+    #root_dir = parser.parse_args().root_dir
     view_features = extractViewFeatures(root_dir)
     view_mathces  = match_features(view_features, root_dir)
     K = np.loadtxt(os.path.join(root_dir, "images", "K.txt"))
