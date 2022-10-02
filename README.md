@@ -22,4 +22,4 @@ Root dir/
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   ...   
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   K.txt
 
- 
+ Use meshlab to view the pointcloud stored in the reconstructed
