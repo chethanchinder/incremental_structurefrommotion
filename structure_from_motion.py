@@ -1,6 +1,6 @@
 from baseline import Baseline
 from motion_utils import *
-from structureFromMotion_python.bundle_adjust import BundleAdjustment
+from bundle_adjust import BundleAdjustment
 
 class Structure:
 
